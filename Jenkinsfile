@@ -6,8 +6,8 @@ node {
 		maven "clean install" 
 		
 	}
-	def maven(args){
-		sh "mvn ${args}"
-	}
+}
+def maven(args){
+	sh "mvn ${args}"
 }
 
