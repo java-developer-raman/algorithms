@@ -3,7 +3,7 @@ node {
 	stage('Build'){
 		echo "Checking out source code";
 		checkout scm
-		sh "cd inventory"
+		dir "inventory"
 		maven "clean install" 
 		
 	}
