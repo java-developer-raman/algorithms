@@ -1,5 +1,13 @@
 #!/usr/bin/env groovy
-checkout scm
-stage('Build'){
-	echo "Hello";
+node {
+	stage('Build'){
+		echo "Checking out source code";
+		checkout scm
+		maven "clean install" 
+		
+	}
+	def maven(args){
+		sh "mvn ${args}"
+	}
 }
+
