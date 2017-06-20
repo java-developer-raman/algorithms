@@ -4,7 +4,7 @@ node {
 	stage('Build'){
 		checkout scm
 		dir('inventory'){
-			createNewProjectVersion()
+			projectVersion = createNewProjectVersion()
 			maven "versions:set -DnewVersion=${projectVersion}"
 			maven "clean compile"
 		}
@@ -34,6 +34,8 @@ def createNewProjectVersion(){
 	String commitId = sh (script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
 	Date now = new Date()
 	String strDateTime = now.format("YYYYMMDDHHmmss")
-	projectVersion = currentVersion + "_" + commitId + "_" + strDateTime
+	p = currentVersion + "_" + commitId + "_" + strDateTime
+	echo "Calculated Project version is ${projectVersion}"
+	return p
 }
 
