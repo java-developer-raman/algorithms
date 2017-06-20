@@ -16,8 +16,8 @@ node {
 	stage('Install'){
 		dir('inventory'){
 			maven "install"
-			GIT_COMMIT_EMAIL = sh (script: 'mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version', returnStdout: true).trim()
-			echo "Git committer email: ${GIT_COMMIT_EMAIL}"
+			projectVersion = sh (script: 'printf 'VERSION=${project.version}\n0\n' | mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate | grep '^VERSION'', returnStdout: true).split()
+			echo "Project Version: ${projectVersion}"
 		}
 	}
 
