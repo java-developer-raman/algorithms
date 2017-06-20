@@ -8,7 +8,7 @@ node {
 			projectVersion = createAndGetNewProjectVersion()
 			maven "versions:set -DnewVersion=${projectVersion}"
 			maven "clean install"
-			rpmName = 'wd-tomcat8-app-ilm' + projectVersion + '_1'
+			rpmName = 'wd-tomcat8-app-ilm-' + projectVersion + '-1.noarch.rpm'
 		}
 		
 	}
