@@ -4,19 +4,19 @@ node {
 		checkout scm
 		dir('inventory'){
 			maven "versions:set -DnewVersion=2.0-SNAPSHOT"
-			maven "clean compile"
+			//maven "clean compile"
 		}
 		
 	}
 	stage('Test'){
 		dir('inventory'){
-			maven "test"
+			//maven "test"
 		}
 	}
 	stage('Install'){
 		dir('inventory'){
-			maven "install"
-			projectVersion = sh (script: 'printf 'VERSION=${project.version}\n0\n' | mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate | grep '^VERSION'', returnStdout: true).split()
+			//maven "install"
+			projectVersion = sh (script: 'printf \'VERSION=${project.version}\\n0\\n\' | mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate | grep \'^VERSION\'', returnStdout: true).split()
 			echo "Project Version: ${projectVersion}"
 		}
 	}
