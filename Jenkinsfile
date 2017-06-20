@@ -11,7 +11,7 @@ node {
 		
 	}
 	stage('Test'){
-		dir('inventory'){
+		dir('inventory/src'){
 			maven "test"
 		}
 	}
@@ -29,7 +29,7 @@ def maven(args){
 def createAndGetNewProjectVersion(){
 	//Fetching current pom version
 	tokens = sh (script: 'printf \'VERSION=${project.version}\\n0\\n\' | mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate | grep \'^VERSION\'', returnStdout: true).split('=')
-	String currentVersion = tokens[1].replaceAll('\\n','')
+	String currentVersion = tokens[1].replaceAll('\\n','').replaceAll('-SNAPSHOT','')
 	//Fetching git commit Id
 	String commitId = sh (script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
 	Date now = new Date()
