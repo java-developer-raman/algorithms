@@ -34,6 +34,6 @@ def createNewProjectVersion(){
 	String commitId = sh (script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
 	Date now = new Date()
 	String strDateTime = now.format("YYYYMMDDHHmmss")
-	return currentVersion + "_" + commitId + "_" + strDateTime
+	projectVersion = currentVersion + "_" + commitId + "_" + strDateTime
 }
 
