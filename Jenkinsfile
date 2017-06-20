@@ -4,7 +4,7 @@ node {
 	stage('Build'){
 		checkout scm
 		dir('inventory'){
-			projectVersion = createNewProjectVersion()
+			projectVersion = createAndGetNewProjectVersion()
 			maven "versions:set -DnewVersion=${projectVersion}"
 			maven "clean compile"
 		}
@@ -26,7 +26,7 @@ def maven(args){
 	sh "mvn ${args}"
 }
 
-def createNewProjectVersion(){
+def createAndGetNewProjectVersion(){
 	//Fetching current pom version
 	tokens = sh (script: 'printf \'VERSION=${project.version}\\n0\\n\' | mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate | grep \'^VERSION\'', returnStdout: true).split('=')
 	String currentVersion = tokens[1].replaceAll('\\n','')
@@ -34,8 +34,6 @@ def createNewProjectVersion(){
 	String commitId = sh (script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
 	Date now = new Date()
 	String strDateTime = now.format("YYYYMMDDHHmmss")
-	p = currentVersion + "_" + commitId + "_" + strDateTime
-	echo "Calculated Project version is ${p}"
-	return p
+	return currentVersion + "_" + commitId + "_" + strDateTime
 }
 
