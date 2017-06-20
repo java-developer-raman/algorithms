@@ -35,7 +35,7 @@ def createNewProjectVersion(){
 	Date now = new Date()
 	String strDateTime = now.format("YYYYMMDDHHmmss")
 	p = currentVersion + "_" + commitId + "_" + strDateTime
-	echo "Calculated Project version is ${projectVersion}"
+	echo "Calculated Project version is ${p}"
 	return p
 }
 
