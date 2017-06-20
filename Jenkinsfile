@@ -11,7 +11,7 @@ node {
 		
 	}
 	stage('Test'){
-		dir('inventory/src'){
+		dir('inventory'){
 			maven "test"
 		}
 	}
