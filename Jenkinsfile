@@ -1,26 +1,23 @@
 #!/usr/bin/env groovy
 node {
-	String hello = 'Build'
+	String projectVersion = null
 	stage('Build'){
 		checkout scm
 		dir('inventory'){
-			echo "Haan ji ${hello}"
-			hello = 'Test'
-			//String newProjectVersion = createAndGetNewProjectVersion(getCurrentProjectVersion())
-			//maven "versions:set -DnewVersion=${newProjectVersion}"
-			//maven "clean compile"
+			createNewProjectVersion()
+			maven "versions:set -DnewVersion=${projectVersion}"
+			maven "clean compile"
 		}
 		
 	}
 	stage('Test'){
 		dir('inventory'){
-			//maven "test"
-			echo "Haan ji ${hello}"
+			maven "test"
 		}
 	}
 	stage('Publish Artifacts'){
 		dir('inventory'){
-			
+			echo "Publishing artifacts for ${projectVersion}"			
 		}
 	}
 
@@ -34,10 +31,11 @@ String getCurrentProjectVersion(){
 			echo "Project Version: ${tokens[1]}"
 	return ${tokens[1]}
 }
-String createAndGetNewProjectVersion(String projectVersion){
-	commitId = sh (script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
+String createNewProjectVersion(String projectVersion){
+	String currentVersion = getCurrentProjectVersion()
+	String commitId = sh (script: 'git rev-parse --short=12 HEAD', returnStdout: true).trim()
 	Date now = new Date()
 	String strDateTime = now.format("YYYYMMDDHHmmss")
-	return commitId + "_" + strDateTime
+	return currentVersion + "_" + commitId + "_" + strDateTime
 }
 
