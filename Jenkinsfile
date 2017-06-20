@@ -1,12 +1,14 @@
 #!/usr/bin/env groovy
 node {
 	String projectVersion = null
+	String rpmName = null
 	stage('Build'){
 		checkout scm
 		dir('inventory'){
 			projectVersion = createAndGetNewProjectVersion()
 			maven "versions:set -DnewVersion=${projectVersion}"
-			maven "clean compile"
+			maven "clean install"
+			rpmName = 'wd-tomcat8-app-ilm' + projectVersion + '_1'
 		}
 		
 	}
@@ -17,7 +19,7 @@ node {
 	}
 	stage('Publish Artifacts'){
 		dir('inventory'){
-			echo "Publishing artifacts for ${projectVersion}"			
+			echo "Publishing artifacts for ${rpmName}"			
 		}
 	}
 
