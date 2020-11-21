@@ -21,7 +21,7 @@ node {
 		}
 	}
 	stage('Publish Artifacts'){
-		def userInput = input message: 'Want to deploy on QE now or schedule', parameters: [string(defaultValue: 'now', description: '', name: 'Time', trim: false)], submitterParameter: 'approver'
+		def userInput = input (message: 'Want to deploy on QE now or schedule', parameters: [string(defaultValue: 'now', description: '', name: 'Time', trim: false)], submitterParameter: 'approver')
 
 		dir('inventory'){
 			//${rpmName}
