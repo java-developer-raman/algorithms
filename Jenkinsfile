@@ -30,6 +30,9 @@ node {
 			echo "Publishing artifacts for ${userInput.Time}"			
 		}
 	}
+	stage('Deploy'){
+		echo "Deploy"
+	}
 
 }
 def maven(args){
