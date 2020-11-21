@@ -1,7 +1,7 @@
 pipeline {
     agent none 
-    node {
-        stages {
+    stages {
+        node {
             stage('Example Build') {
                 //agent { docker 'maven:3-alpine' } 
                 steps {
