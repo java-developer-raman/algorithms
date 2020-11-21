@@ -6,21 +6,24 @@ node {
 	stage('Build'){
 		checkout scm
 		dir('inventory'){
-			projectVersion = createAndGetNewProjectVersion()
-			maven "versions:set -DnewVersion=${projectVersion}"
-			maven "clean install"
-			rpmName = 'wd-tomcat8-app-ilm-' + projectVersion + '-1.noarch.rpm'
+			//projectVersion = createAndGetNewProjectVersion()
+			//maven "versions:set -DnewVersion=${projectVersion}"
+			//maven "clean install"
+			//rpmName = 'wd-tomcat8-app-ilm-' + projectVersion + '-1.noarch.rpm'
+			echo "building"
 		}
 		
 	}
 	stage('Test'){
 		dir('inventory'){
-			maven "test"
+			//maven "test"
+			echo "testing"
 		}
 	}
 	stage('Publish Artifacts'){
 		dir('inventory'){
-			echo "Publishing artifacts for ${rpmName}"			
+			//${rpmName}
+			echo "Publishing artifacts for"			
 		}
 	}
 
