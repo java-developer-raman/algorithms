@@ -25,7 +25,7 @@ node {
 
 		dir('inventory'){
 			//${rpmName}
-			echo "Publishing artifacts for ${userInput.name}"			
+			echo "Publishing artifacts for ${userInput.Time}"			
 		}
 	}
 
