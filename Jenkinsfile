@@ -20,8 +20,9 @@ node {
 			echo "testing"
 		}
 	}
-	input message: 'Want to deploy on QE now or schedule', parameters: [string(defaultValue: 'now', description: '', name: 'Time', trim: false)], submitterParameter: 'approver'
 	stage('Publish Artifacts'){
+		input message: 'Want to deploy on QE now or schedule', parameters: [string(defaultValue: 'now', description: '', name: 'Time', trim: false)], submitterParameter: 'approver'
+
 		dir('inventory'){
 			//${rpmName}
 			echo "Publishing artifacts for ${approver}"			
