@@ -22,7 +22,7 @@ node {
 	}
 	stage('Publish Artifacts'){
 		def userInput = null
-		timeout(time: 60, unit: 'SECONDS') {
+		timeout(time: 10, unit: 'SECONDS') {
 			userInput = input (message: 'Want to deploy on QE now or schedule', parameters: [string(defaultValue: 'now', description: '', name: 'Time', trim: false)], submitterParameter: 'approver')
 		}	
 		dir('inventory'){
